@@ -4,19 +4,41 @@
       class="aaaaaa"
       temporary
       disable-resize-watcher
-      :width="$data.windowSize.x * .5"
+      :width="getDrawerWidth"
       fixed
       v-model="drawer"
       app
     >
-      {{ $store.getters.getCount }}
+<v-toolbar>
+ <v-btn-toggle v-model="toggleExclusive">
+                <v-btn :value="1" flat>
+                  <v-icon>format_align_left</v-icon>
+                </v-btn>
+                <v-btn :value="2" flat>
+                  <v-icon>format_align_center</v-icon>
+                </v-btn>
+                <v-btn :value="3" flat>
+                  <v-icon>format_align_right</v-icon>
+                </v-btn>
+                <v-btn :value="4" flat>
+                  <v-icon>format_align_justify</v-icon>
+                </v-btn>
+              </v-btn-toggle>
+               <v-divider vertical></v-divider>
+ <v-switch v-model="darkMode" :label="`${darkMode ? 'Dark' : 'Light'} Mode`" hide-details/>
+{{ toggleExclusive }}
+  <v-divider vertical></v-divider>
+<v-select v-model="color" @change="changeMainColor" :items="mainColors" box label="Box style"/>
+
+</v-toolbar>
+
       <div id="nav">
         <router-link to="/">Home</router-link>|
         <router-link to="/about">About</router-link>|
         <router-link to="/test">Test</router-link>
       </div>
       <v-switch v-model="darkMode" :label="`${darkMode ? 'Dark' : 'Light'} Mode`" hide-details/>
-      <v-select @change="changeMainColor" :items="mainColors" box label="Box style"/>
+      <v-select  v-model="color" @change="changeMainColor" :items="mainColors" box label="Box style"/>
     </v-navigation-drawer>
 
     <v-navigation-drawer
@@ -31,6 +53,7 @@
     <v-toolbar :color="$store.getters.getMainColor" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
       <v-toolbar-title>Application</v-toolbar-title>
+      <v-spacer />
       <v-toolbar-side-icon @click.stop="drawer2 = !drawer2"/>
     </v-toolbar>
     <v-content>
@@ -53,19 +76,43 @@ import { mapActions } from 'vuex';
       x: 0,
       y: 0,
     },
+    toggleExclusive: null,
+    color: null,
   }),
+  computed: {
+    getDrawerWidth() {
+      const width: number = this.$data.windowSize.x * .7;
+      return width < 150
+        ? 150
+        : (
+          width > 700
+            ? 700
+            : width
+          );
+    },
+  },
   methods: {
     ...mapActions(['updateMainColor']),
     ...mapActions({
       changeMainColor: 'updateMainColor',
     }),
+    // toggleExclusive() {
+    //   console.log(333333);
+
+    //   return this.$data.toggleExclusive;
+    // },
   },
 })
 export default class App extends Vue {
   public drawer: boolean = false;
   public drawer2: boolean = false;
-  public darkMode: boolean = false;
 
+  public get darkMode(): boolean {
+    return this.$store.getters.getDarkTheme;
+  }
+  public set darkMode(value: boolean) {
+    this.$store.commit('setDarkTheme', value);
+  }
   public mainColors: string[] = ['primary', 'blue-grey', 'light-green', 'red'];
 
   public mounted(): void {
@@ -73,8 +120,7 @@ export default class App extends Vue {
   }
 
   public onResize(): void {
-    console.log(111, this.drawer);
-    
+    // console.log(111, this.drawer);
     // this.drawer = false;
     this.$data.windowSize = { x: window.innerWidth, y: window.innerHeight };
   }
