@@ -4,6 +4,9 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
+import { State, Action, Getter } from 'vuex-class';
+
+const namespace: string = 'profile';
 
 @Component
 export default class DarkModeSwitch extends Vue {
@@ -18,12 +21,18 @@ export default class DarkModeSwitch extends Vue {
   })
   public readonly darkModeOffLabel!: string;
 
+  @Getter('getDarkTheme')
+  private DarkMode!: boolean;
+
+  @Action('setDarkTheme')
+  private SetDarkTheme!: any;
+
   public get darkMode(): boolean {
-    return this.$store.getters.getDarkTheme;
+    return this.DarkMode;
   }
 
   public set darkMode(value: boolean) {
-    this.$store.commit('setDarkTheme', value);
+    this.SetDarkTheme(value);
     this.changeDarkMode();
   }
 
@@ -31,5 +40,6 @@ export default class DarkModeSwitch extends Vue {
   public changeDarkMode() {
     return this.darkMode;
   }
+
 }
 </script>

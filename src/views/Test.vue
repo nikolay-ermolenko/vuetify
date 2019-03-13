@@ -5,7 +5,7 @@
 
     </h1>
     <v-btn color="primary" outline large round @click="incrementClick">Increment</v-btn>
-    <blockquote class="blockquote">{{ getCount }}</blockquote>
+    <blockquote class="blockquote">{{ count }}</blockquote>
     <v-img
       :src="getSrc"
       :lazy-src="getLazySrc"
@@ -17,34 +17,31 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { State, Action, Getter } from 'vuex-class';
 import DarkModeSwitch from '@/components/DarkModeSwitch.vue';
 
 @Component({components: {DarkModeSwitch}})
 export default class Test extends Vue {
+
+  @Action('incrementCount', {namespace: 'profile'})
+  public incrementClick: any;
+
+  @Getter('getCount', {namespace: 'profile'})
+  public count!: boolean;
+
   private src: string = 'https://picsum.photos/1800/1100?image=';
 
   private lazySrc: string = 'https://picsum.photos/50/30?image=';
 
-  public get getCount(): number {
-    return this.$store.getters.getCount;
-  }
-
   public get getSrc(): string {
-    return this.src + this.getCount;
-  }
-
-   public get darkMode(): boolean {
-    return this.$store.getters.getDarkTheme;
-  }
-  public set darkMode(value: boolean) {
-    this.$store.commit('setDarkTheme', value);
+    return this.src + this.count;
   }
 
   public get getLazySrc(): string {
-    return this.lazySrc + this.getCount;
+    return this.lazySrc + this.count;
   }
 
-  public incrementClick() {
+  public incrementClickOld() {
     this.$store.dispatch('incrementCount')
       .then(() => this.$emit('incremented'));
   }
