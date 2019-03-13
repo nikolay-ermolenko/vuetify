@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>This is an TEST page
- <v-switch class="right" v-model="darkMode" :label="`${darkMode ? 'Dark' : 'Light'} Mode`" hide-details/>
+      <DarkModeSwitch class="right" darkModeOnLabel="Тьма над нами!" darkModeOffLabel="Да будет СВЕТ!!" />
 
     </h1>
     <v-btn color="primary" outline large round @click="incrementClick">Increment</v-btn>
@@ -17,8 +17,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import DarkModeSwitch from '@/components/DarkModeSwitch.vue';
 
-@Component
+@Component({components: {DarkModeSwitch}})
 export default class Test extends Vue {
   private src: string = 'https://picsum.photos/1800/1100?image=';
 

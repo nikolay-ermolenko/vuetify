@@ -25,7 +25,7 @@
                 </v-btn>
               </v-btn-toggle>
                <v-divider vertical></v-divider>
- <v-switch v-model="darkMode" :label="`${darkMode ? 'Dark' : 'Light'} Mode`" hide-details/>
+               <DarkModeSwitch />
 {{ toggleExclusive }}
   <v-divider vertical></v-divider>
 <v-select v-model="color" @change="changeMainColor" :items="mainColors" box label="Box style"/>
@@ -37,7 +37,7 @@
         <router-link to="/about">About</router-link>|
         <router-link to="/test">Test</router-link>
       </div>
-      <v-switch v-model="darkMode" :label="`${darkMode ? 'Dark' : 'Light'} Mode`" hide-details/>
+      <DarkModeSwitch />      
       <v-select  v-model="color" @change="changeMainColor" :items="mainColors" box label="Box style"/>
     </v-navigation-drawer>
 
@@ -49,11 +49,15 @@
       :width="$data.windowSize.x * .9"
       v-model="drawer2"
       app
-    >1231231</v-navigation-drawer>
+    >1231231
+    <DarkModeSwitch darkModeOnLabel="Тьма режим!!!111" @change="onDarkModeChange" />
+    
+    </v-navigation-drawer>
     <v-toolbar :color="$store.getters.getMainColor" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"/>
       <v-toolbar-title>Application</v-toolbar-title>
       <v-spacer />
+       
       <v-toolbar-side-icon @click.stop="drawer2 = !drawer2"/>
     </v-toolbar>
     <v-content>
@@ -61,6 +65,7 @@
         <router-view/>
       </v-container>
     </v-content>
+   
     <!-- <v-footer app></v-footer> -->
   </v-app>
 </template>
@@ -69,8 +74,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { mapActions } from 'vuex';
+import DarkModeSwitch from '@/components/DarkModeSwitch.vue';
 
 @Component({
+  components: {
+    DarkModeSwitch,
+  },
   data: () => ({
     windowSize: {
       x: 0,
@@ -123,6 +132,11 @@ export default class App extends Vue {
     // console.log(111, this.drawer);
     // this.drawer = false;
     this.$data.windowSize = { x: window.innerWidth, y: window.innerHeight };
+  }
+
+  public onDarkModeChange(): void {
+    console.log(111, arguments);
+    
   }
 }
 
