@@ -2,7 +2,7 @@ import { ActionTree } from 'vuex';
 import { RootState } from '@/store/types';
 import { ProfileState, User } from './types';
 
-export const actions: ActionTree<ProfileState, RootState> = {
+export const actions: ActionTree< ProfileState, RootState> = {
   fetchData({ commit }): any {
     const payload: User = {
       firstName: 'Ivan',

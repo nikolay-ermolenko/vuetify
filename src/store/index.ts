@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store<RootState>({
   state: {
-    darkTheme: true,
+    darkTheme: false,
     mainColor: 'primary',
     availableColors: [
       'primary',

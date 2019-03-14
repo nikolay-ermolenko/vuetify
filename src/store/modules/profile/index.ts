@@ -14,7 +14,7 @@ export const state: profileTypes.ProfileState = {
 // https://johnpapa.net/vue-typescript/
 const namespaced: boolean = true;
 
-export const profile: Module<profileTypes.ProfileState, RootState> = {
+export const profile: Module< profileTypes.ProfileState, RootState> = {
   namespaced,
   state,
   getters,

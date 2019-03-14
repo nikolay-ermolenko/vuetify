@@ -88,6 +88,7 @@
 
 
 <script lang="ts">
+import VueRouter from 'vue-router';
 import { Component, Vue } from 'vue-property-decorator';
 // import Vue from 'vue';
 // import Component from 'vue-class-component';
@@ -95,6 +96,9 @@ import { State, Action, Getter } from 'vuex-class';
 import { ProfileState, User } from '@/store/modules/profile/types';
 import DarkModeSwitch from '@/components/DarkModeSwitch.vue';
 import MainColorSelector from '@/components/MainColorSelector.vue';
+// import router from '@/router';
+
+Vue.use(VueRouter);
 
 const namespace: string = 'profile';
 
@@ -103,6 +107,22 @@ const namespace: string = 'profile';
     DarkModeSwitch,
     MainColorSelector,
   },
+  router: new VueRouter({
+    linkActiveClass: "text-blue font-bold",
+    routes: [
+      { 
+        path: '/about',
+        alias: '/about/*',
+        meta: {basePath: '/about'},
+        component: () => import (/* webpackChunkName: "about" */ './views/About.vue'),
+      },
+      { 
+        path: '/test', 
+        alias: '/test/*',
+        component: () => import (/* webpackChunkName: "test" */ './views/Test.vue'),
+      }
+    ]
+  }),
 })
 export default class App extends Vue {
 
