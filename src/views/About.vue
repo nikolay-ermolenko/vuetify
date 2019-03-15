@@ -22,16 +22,16 @@ import Tab1 from '@/views/Tab1.vue';
 @Component({ components: { MainColorSelector } })
 export default class About extends Vue {
   public onChange(color: string): void {
-    console.log('MainColorSelectoronChange', color);
+    // console.log('MainColorSelectoronChange', color);
   }
 
   public created() {
     if (this.routeNameAlreadyRegistered(this.$router, 'tab1')) {
       return;
     }
-    console.log(111, this.getParentRouterPath(this),
-    this.getParentRouterPath(this) + '/tab1'
-    );
+    // console.log(111, this.getParentRouterPath(this),
+    // this.getParentRouterPath(this) + '/tab1'
+    // );
 
     this.$router.addRoutes([{
       name: 'tab1',
