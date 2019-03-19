@@ -7,7 +7,7 @@ import { RootState } from './store/types';
 Vue.use(Vuex);
 
 
-const store: StoreOptions<RootState> = {
+const store: StoreOptions< RootState> = {
   // state: {
   //   version: '1.0.0',
   // },
@@ -20,7 +20,7 @@ const store: StoreOptions<RootState> = {
   //   profile,
   // },
 };
-export default new Vuex.Store<RootState>(store);
+export default new Vuex.Store< RootState>(store);
 
 // export default new Vuex.Store({
 //   state: {

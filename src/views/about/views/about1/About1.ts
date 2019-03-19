@@ -62,10 +62,10 @@ export default class About1 extends Vue {
   ];
 
   public getEditRoute(id: number): string {
-    return `${this.$route.fullPath}/${id}/edit`;
+    return `${this.$route.meta.basePath}/${id}/edit`;
   }
 
   public getCardRoute(id: number): string {
-    return `${this.$route.fullPath}/${id}`;
+    return `${this.$route.meta.basePath}/${id}`;
   }
 }

@@ -1,0 +1,52 @@
+<v-navigation-drawer temporary
+                     disable-resize-watcher
+                     fixed
+                     right
+                     :width="500"
+                     v-model="value">
+  <div class="dx-fieldset form">
+
+    <v-card-title primary-title>
+      <div>
+        <v-avatar size="85">
+          <img :src="getAvatar()"
+               alt="avatar">
+        </v-avatar>
+        <h3 class="headline mb-0">
+          {{ userData.name }} {{ value }}
+
+          <dx-button icon="edit"
+                     @click="onButtonClick(userData.id, 'edit')" />
+        </h3>
+        <div> {{ userData.username }} </div>
+      </div>
+    </v-card-title>
+
+    <div class="dx-field">
+      <div class="dx-field-label">Email</div>
+      <div class="dx-field-value-static">
+        <p>
+          <span id="subject1">{{ userData.email }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">Phone</div>
+      <div class="dx-field-value-static">
+        <p>
+          <span id="subject1">{{ userData.phone }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">Website</div>
+      <div class="dx-field-value-static">
+        <p>
+          <span id="subject1">{{ userData.website }}</span>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+</v-navigation-drawer>

@@ -4,8 +4,8 @@ import WithRender from './App.html';
 
 Vue.use(VueRouter);
 
-@WithRender
-@Component({
+@ WithRender
+@ Component({
   router: new VueRouter({
     routes: [
       {
@@ -13,6 +13,12 @@ Vue.use(VueRouter);
         alias: '/about/*',
         meta: { basePath: '/about' },
         component: () => import(/* webpackChunkName: "about" */ './views/about/About'),
+      },
+      {
+        path: '/dx',
+        alias: '/dx/*',
+        meta: { basePath: '/dx' },
+        component: () => import(/* webpackChunkName: "dx" */ './views/dx/Main'),
       },
       {
         path: '/test',

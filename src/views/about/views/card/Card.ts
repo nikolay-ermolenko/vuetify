@@ -5,9 +5,7 @@ import WithRender from './Card.html';
 @Component
 export default class Card extends Vue {
 
-  public get value() {
-    return this.id;
-  };
+  public value: boolean = true;
 
   @Prop({
     required: true,
@@ -18,7 +16,10 @@ export default class Card extends Vue {
   public id!: number;
 
   @Watch('value')
-  public aaa() {
-    console.log(2222222);
+  public onValueChanged(value: boolean, oldValue: boolean) {
+    if (value === false) {
+      this
+        .$router.push(this.$route.meta.basePath);
+    }
   }
 }

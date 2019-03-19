@@ -1,0 +1,47 @@
+<v-content>
+  <v-container fluid>
+    <v-navigation-drawer temporary
+                         disable-resize-watcher
+                         fixed
+                         right
+                         :width="500"
+                         v-model="value">
+
+      <div class="dx-fieldset">
+
+        <div class="dx-fieldset-header">Main data</div>
+        <div class="dx-field">
+          <div class="dx-field-label">Name</div>
+          <div class="dx-field-value">
+            <dx-text-box :value="userData.name" />
+          </div>
+        </div>
+        <div class="dx-field">
+          <div class="dx-field-label">User Name</div>
+          <div class="dx-field-value">
+            <dx-text-box :value="userData.username" />
+          </div>
+        </div>
+        <div class="dx-field">
+          <div class="dx-field-label">Email</div>
+          <div class="dx-field-value">
+            <dx-text-box :value="userData.email" />
+          </div>
+        </div>
+        <div class="dx-field">
+          <div class="dx-field-label">Phone</div>
+          <div class="dx-field-value">
+            <dx-text-box :value="userData.phone" />
+          </div>
+        </div>
+        <div class="dx-field">
+          <div class="dx-field-label">Website</div>
+          <div class="dx-field-value">
+            <dx-text-box :value="userData.website" />
+          </div>
+        </div>
+
+      </div>
+    </v-navigation-drawer>
+  </v-container>
+</v-content>

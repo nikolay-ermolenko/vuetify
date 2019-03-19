@@ -1,0 +1,33 @@
+<v-content style="height:100%">
+  <!-- <v-container fluid> -->
+    <h2>Список сотрудников</h2>
+
+    <dx-data-grid :data-source="users"
+                  :columns="columns"
+                  :show-borders="true"
+                  :showColumnLines="true"
+                  :rowAlternationEnabled="true"
+                  :selection="{ mode: 'single' }"
+                  :hover-state-enabled="true"
+                  height="100%"
+                  @selection-changed="onSelectionChanged">
+      <dx-column :width="100"
+                 :allow-sorting="false"
+                 data-field="id"
+                 caption=""
+                 cell-template="cellTemplate" />
+      <div slot="cellTemplate"
+           slot-scope="user">
+        <dx-button icon="card"
+                   @click="onButtonClick(user, 'card')" />
+        <dx-button icon="edit"
+                   @click="onButtonClick(user, 'edit')" />
+      </div>
+    </dx-data-grid>
+
+  <!-- </v-container> -->
+  <div>
+    <router-view />
+  </div>
+
+</v-content>
